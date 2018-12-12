@@ -1,0 +1,28 @@
+{
+  "name": "basic-queue",
+  "version": "1.0.0",
+  "description": "A basic queue for managing workflows",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tastypackets/basic-queue.git"
+  },
+  "keywords": [
+    "queue",
+    "work queue",
+    "work flow",
+    "basic queue"
+  ],
+  "author": "Ezekiel Keator",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tastypackets/basic-queue/issues"
+  },
+  "homepage": "https://github.com/tastypackets/basic-queue#readme",
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
+}
