@@ -42,7 +42,7 @@ class BasicQueue {
         if(this._frozen)
             return this._frozenErrorMsg;
 
-        return this.getIndex(-1, qty);
+        return this.getIndex(qty * -1, qty).reverse();
     }
 
     /**
@@ -90,11 +90,11 @@ class BasicQueue {
      * Add one item to the begnning of the queue
      * @param {*} item Item to be added to queue
      */
-    addToBeginning(item) {
+    addToBeginning(item) { //TODO: This needs to handle multiple items
         if(this._frozen)
             return this._frozenErrorMsg;
 
-        this._queue.splice(1, 0, item);
+        this._queue.splice(0, 0, item);
         return {success: true, message: 'Added item to end of queue.'};
     };
 

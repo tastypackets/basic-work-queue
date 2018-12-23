@@ -54,7 +54,7 @@ describe('Basic Operations', function() {
     });
 
     describe('#add()', function() {
-        it('Should have be able to add new items', function() {
+        it('Should be able to add new items', function() {
             const q = new BasicQueue();
             q.add('1');
             assert.strictEqual(q.queue[0], '1');
@@ -72,6 +72,68 @@ describe('Basic Operations', function() {
             assert.strictEqual(typeof q.queue[3], 'object');
         });
     });
+
+    describe('#addToBeginning()', function() {
+        it('Should be able to add new items to beginning of queue', function() {
+            const q = new BasicQueue();
+            assert.strictEqual(q.addToBeginning(1).success, true)
+            assert.strictEqual(q.queue[0], 1);
+            assert.strictEqual(q.addToBeginning(2).success, true)
+            assert.strictEqual(q.addToBeginning(3).success, true)
+            assert.strictEqual(q.addToBeginning(4).success, true)
+            assert.strictEqual(q.queue[0], 4);
+            assert.strictEqual(q.queue[3], 1);
+            assert.strictEqual(q.queue.length, 4);
+        });
+        it('Should be able to add many types of items', function() {
+            const q = new BasicQueue();
+            q.add('1')
+            q.add('2')
+            q.add(3);
+            assert.strictEqual(typeof q.queue[0], 'string');
+            assert.strictEqual(typeof q.queue[2], 'number');
+            q.add({test: 'test'});
+            assert.strictEqual(typeof q.queue[3], 'object');
+        });
+    });
+
+    describe('#getNext()', function() {
+        it('Should be able to get next item in queue', function() {
+            const q = new BasicQueue([1 , 2, 3]);
+            assert.strictEqual(q.getNext()[0], 1);
+            assert.strictEqual(q.queue.length, 2);
+            assert.strictEqual(q.queue[0], 2);
+        });
+        it('Should be able to get multiple next items in queue', function() {
+            const q = new BasicQueue([1 , 2, 3]);
+            const items = q.getNext(2);
+            assert.strictEqual(items[0], 1);
+            assert.strictEqual(items.length, 2);
+            assert.strictEqual(q.queue.length, 1);
+        });
+    });
+
+    describe('#getLast()', function() {
+        it('Should be able to get next last item in queue', function() {
+            const q = new BasicQueue([1 , 2, 3]);
+            assert.strictEqual(q.getLast()[0], 3);
+            assert.strictEqual(q.queue.length, 2);
+            assert.strictEqual(q.queue[0], 1);
+        });
+        it('Should be able to get multiple of the last items in queue', function() {
+            const q = new BasicQueue([1 , 2, 3, 4, 5, 6]);
+            const items = q.getLast(2);
+            assert.strictEqual(items[0], 6);
+            assert.strictEqual(items.length, 2);
+            assert.strictEqual(q.queue.length, 4);
+
+            const items2 = q.getLast(3);
+            assert.strictEqual(items2[0], 4);
+            assert.strictEqual(items2[2], 2);
+            assert.strictEqual(q.queue.length, 1);
+        });
+    });
+
     describe('#remove()', function() {
         it('Should be able to remove items', function() {
             const q = new BasicQueue([1 , 2, 3]);
