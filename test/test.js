@@ -51,15 +51,66 @@ describe('Basic Operations', function() {
             q.freeze();
             assert.strictEqual(q.frozen, true);
         });
+        it('Should be able to set frozenCB', function() {
+            const testFn1 = () => {};
+            const testFn2 = () => {};
+
+            const q = new BasicQueue([], testFn1);
+            assert.strictEqual(q.frozenCB, testFn1);
+
+            q.frozenCB = testFn2;
+            assert.strictEqual(q.frozenCB, testFn2);
+        });
+        it('Should not be able to set frozenCB to anything, except a function', function() {
+            const q = new BasicQueue([], 'random string');
+            assert.strictEqual(q.frozenCB, null);
+
+            q.frozenCB = 'another string'
+            assert.strictEqual(q.frozenCB, null);
+
+            // Should stay as prev fn
+            const testFn1 = () => {};
+            q.frozenCB = testFn1;
+            assert.strictEqual(q.frozenCB, testFn1);
+            q.frozenCB = 'another string'
+            assert.strictEqual(q.frozenCB, testFn1);
+        });
+    });
+
+    describe('#freezeCheck()', function() {
+        it('Should execute CB if it exists and queue is frozen', function(done) {
+            const callDone = (err) => {
+                // We are expecting an error in this test, so if there is error return no error to mocha
+                if(err) {
+                    done();
+                    return
+                };
+
+                done(new Error('Expected and error'));
+            }
+
+            const q = new BasicQueue([], callDone);
+            q.freeze();
+            assert.strictEqual(q.add(1), false);
+        });
     });
 
     describe('#add()', function() {
+        it('Should return true when value is added', function() {
+            const q = new BasicQueue();
+            assert.strictEqual(q.add(1), true);
+        });
+        it('Should return false if frozen', function() {
+            const q = new BasicQueue();
+            q.freeze();
+            assert.strictEqual(q.add(1), false);
+        });
         it('Should be able to add new items', function() {
             const q = new BasicQueue();
-            q.add('1');
-            assert.strictEqual(q.queue[0], '1');
-            q.add('2');
-            assert.strictEqual(q.queue[1], '2');
+            q.add(1);
+            assert.strictEqual(q.queue[0], 1);
+            q.add(2);
+            assert.strictEqual(q.queue[1], 2);
         });
         it('Should be able to add many types of items', function() {
             const q = new BasicQueue();
@@ -85,15 +136,11 @@ describe('Basic Operations', function() {
             assert.strictEqual(q.queue[3], 1);
             assert.strictEqual(q.queue.length, 4);
         });
-        it('Should be able to add many types of items', function() {
+        // TODO: Add many to beginning
+        it('Should return false if frozen', function() {
             const q = new BasicQueue();
-            q.add('1')
-            q.add('2')
-            q.add(3);
-            assert.strictEqual(typeof q.queue[0], 'string');
-            assert.strictEqual(typeof q.queue[2], 'number');
-            q.add({test: 'test'});
-            assert.strictEqual(typeof q.queue[3], 'object');
+            q.freeze();
+            assert.strictEqual(q.addToBeginning(1), false);
         });
     });
 
@@ -110,6 +157,11 @@ describe('Basic Operations', function() {
             assert.strictEqual(items[0], 1);
             assert.strictEqual(items.length, 2);
             assert.strictEqual(q.queue.length, 1);
+        });
+        it('Should return false if frozen', function() {
+            const q = new BasicQueue([1 , 2, 3]);
+            q.freeze();
+            assert.strictEqual(q.getNext(1), false);
         });
     });
 
@@ -132,6 +184,11 @@ describe('Basic Operations', function() {
             assert.strictEqual(items2[2], 2);
             assert.strictEqual(q.queue.length, 1);
         });
+        it('Should return false if frozen', function() {
+            const q = new BasicQueue([1 , 2, 3]);
+            q.freeze();
+            assert.strictEqual(q.getLast(1), false);
+        });
     });
 
     describe('#getIndex()', function() {
@@ -153,12 +210,17 @@ describe('Basic Operations', function() {
             assert.strictEqual(items.length, 3);
             assert.strictEqual(q.queue.length, 5);
         });
+        it('Should return false if frozen', function() {
+            const q = new BasicQueue([1 , 2, 3]);
+            q.freeze();
+            assert.strictEqual(q.getIndex(1), false);
+        });
     });
 
     describe('#remove()', function() {
         it('Should be able to remove items', function() {
             const q = new BasicQueue([1 , 2, 3]);
-            assert.strictEqual(q.remove(2).success, true);
+            assert.strictEqual(q.remove(2), true);
             assert.strictEqual(q.queue[1], 3);
         });
         it('Should require exact equality to remove', function() {
@@ -166,34 +228,44 @@ describe('Basic Operations', function() {
             const q = new BasicQueue([exactObj, 2, '3']);
 
             // Try to remove similar obj
-            assert.strictEqual(q.remove({test: 'test'}).message, 'Unable to locate item.')
+            assert.strictEqual(q.remove({test: 'test'}), false)
             assert.strictEqual(q.queue[0], exactObj)
 
             // Try to remove exact obj
-            assert.strictEqual(q.remove(exactObj).success, true)
+            assert.strictEqual(q.remove(exactObj), true)
             assert.strictEqual(q.queue[0], 2)
+        });
+        it('Should return false if frozen', function() {
+            const q = new BasicQueue([1 , 2, 3]);
+            q.freeze();
+            assert.strictEqual(q.remove(1), false);
         });
     });
 
     describe('#removeIndex()', function() {
         it('Should default to index 0', function() {
             const q = new BasicQueue([1 , 2, 3]);
-            assert.strictEqual(q.removeIndex().success, true);
+            assert.strictEqual(q.removeIndex(), true);
             assert.strictEqual(q.queue[1], 3);
             assert.strictEqual(q.queue.length, 2);
         });
         it('Should be able to delete specific index', function() {
             const q = new BasicQueue([1 , 2, 3]);
-            assert.strictEqual(q.removeIndex(2).success, true);
+            assert.strictEqual(q.removeIndex(2), true);
             assert.strictEqual(q.queue[1], 2);
             assert.strictEqual(q.queue.length, 2);
         });
         it('Should be able to delete multiple items starting at a specific index', function() {
             const q = new BasicQueue([1 , 2, 3, 4, 5]);
-            assert.strictEqual(q.removeIndex(2, 2).success, true);
+            assert.strictEqual(q.removeIndex(2, 2), true);
             assert.strictEqual(q.queue[1], 2);
             assert.strictEqual(q.queue[2], 5);
             assert.strictEqual(q.queue.length, 3);
+        });
+        it('Should return false if frozen', function() {
+            const q = new BasicQueue([1 , 2, 3]);
+            q.freeze();
+            assert.strictEqual(q.removeIndex(1), false);
         });
     });
   });
