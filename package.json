@@ -4,7 +4,8 @@
   "description": "A basic queue for managing workflows",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "doc": "jsdoc index.js -c jsdoc.json"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,8 @@
   },
   "homepage": "https://github.com/tastypackets/basic-queue#readme",
   "devDependencies": {
-    "mocha": "^5.2.0"
+    "jsdoc": "^3.5.5",
+    "mocha": "^5.2.0",
+    "tui-jsdoc-template": "^1.2.2"
   }
 }

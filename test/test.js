@@ -131,11 +131,11 @@ describe('Basic Operations', function() {
     describe('#addToBeginning()', function() {
         it('Should be able to add new items to beginning of queue', function() {
             const q = new BasicQueue();
-            assert.strictEqual(q.addToBeginning(1).success, true)
+            assert.strictEqual(q.addToBeginning(1), true)
             assert.strictEqual(q.queue[0], 1);
-            assert.strictEqual(q.addToBeginning(2).success, true)
-            assert.strictEqual(q.addToBeginning(3).success, true)
-            assert.strictEqual(q.addToBeginning(4).success, true)
+            assert.strictEqual(q.addToBeginning(2), true)
+            assert.strictEqual(q.addToBeginning(3), true)
+            assert.strictEqual(q.addToBeginning(4), true)
             assert.strictEqual(q.queue[0], 4);
             assert.strictEqual(q.queue[3], 1);
             assert.strictEqual(q.queue.length, 4);
