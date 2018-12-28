@@ -52,7 +52,7 @@ class BasicQueue {
             return false;
 
         if(this.frozenCB)
-            this.frozenCB(this.queue);
+            this.frozenCB(this);
         
         return true;
     };
@@ -70,10 +70,10 @@ class BasicQueue {
     };
 
     /**
-     * Add one item to the begnning of the queue
+     * Add one item to the beginning of the queue
      * @param {*} item Item to be added to queue
      */
-    addToBeginning(item) { //TODO: This needs to handle multiple items
+    addToBeginning(item) {
         if(this.freezeCheck())
             return false;
 

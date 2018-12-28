@@ -11,6 +11,7 @@ describe('Basic Operations', function() {
             assert.strictEqual(new BasicQueue(['1']).queue[0], '1');
         });
     });
+
     describe('#getters & setters', function() {
         it('Should be able to get queue', function() {
             assert.strictEqual(Array.isArray(new BasicQueue().queue), true);
@@ -79,17 +80,20 @@ describe('Basic Operations', function() {
 
     describe('#freezeCheck()', function() {
         it('Should execute CB if it exists and queue is frozen', function(done) {
-            const callDone = (err) => {
+            const callDone = (theQ) => {
                 // We are expecting an error in this test, so if there is error return no error to mocha
-                if(err) {
+                if(theQ) {
+                    // The queue should be passed into the CB
+                    assert(theQ instanceof BasicQueue);
+                    assert.strictEqual(theQ.queue.length, 2)
                     done();
                     return
                 };
 
-                done(new Error('Expected and error'));
+                done(new Error('Expected an error'));
             }
 
-            const q = new BasicQueue([], callDone);
+            const q = new BasicQueue([1, 2], callDone);
             q.freeze();
             assert.strictEqual(q.add(1), false);
         });
