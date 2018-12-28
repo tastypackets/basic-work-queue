@@ -1,0 +1,17 @@
+{
+    "opts": {
+        "template": "node_modules/tui-jsdoc-template",
+        "encoding": "utf8",
+        "destination": "./docs/",
+        "recurse": true
+    },
+    "templates": {
+        "name": "basic-queue",
+        "footerText": "A basic JavaScript Queue",
+        "logo": {
+            "width": "0px",
+            "height": "0px",
+            "link": "https://github.com/tastypackets/basic-queue"
+        }
+    }
+}

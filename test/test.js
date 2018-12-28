@@ -76,6 +76,19 @@ describe('Basic Operations', function() {
             q.frozenCB = 'another string'
             assert.strictEqual(q.frozenCB, testFn1);
         });
+        it('Should be able to set frozen to true / false', function() {
+            const q = new BasicQueue([], 'random string');
+            q.frozen = true;
+            assert.strictEqual(q.frozen, true);
+            q.frozen = false;
+            assert.strictEqual(q.frozen, false);
+        });
+        it('Should not be able to set frozen to anything except boolean', function() {
+            const q = new BasicQueue([], 'random string');
+            // This should not alter frozen
+            q.frozen = 'test';
+            assert.strictEqual(q.frozen, false);
+        });
     });
 
     describe('#freezeCheck()', function() {
@@ -131,11 +144,11 @@ describe('Basic Operations', function() {
     describe('#addToBeginning()', function() {
         it('Should be able to add new items to beginning of queue', function() {
             const q = new BasicQueue();
-            assert.strictEqual(q.addToBeginning(1).success, true)
+            assert.strictEqual(q.addToBeginning(1), true)
             assert.strictEqual(q.queue[0], 1);
-            assert.strictEqual(q.addToBeginning(2).success, true)
-            assert.strictEqual(q.addToBeginning(3).success, true)
-            assert.strictEqual(q.addToBeginning(4).success, true)
+            assert.strictEqual(q.addToBeginning(2), true)
+            assert.strictEqual(q.addToBeginning(3), true)
+            assert.strictEqual(q.addToBeginning(4), true)
             assert.strictEqual(q.queue[0], 4);
             assert.strictEqual(q.queue[3], 1);
             assert.strictEqual(q.queue.length, 4);
