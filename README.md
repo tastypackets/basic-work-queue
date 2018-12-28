@@ -19,7 +19,12 @@ const myQueue = new BasicQueue();
 // A new queue with a default array of values
 const myQueue2 = new BasicQueue([1,2,3]);
 
+// A new queue with a default array and a call back to execut when an op is attempted while frozen
+const myQueue2 = new BasicQueue([1,2,3], (q) => {
+  console.log('Queue is frozen')
+  console.log(`The queue size is ${q.queue.length}`)
+});
 ```
 
 # Testing
-Run the mocha test script to test the library, using yarn it would simply `yarn test`.
+Run the mocha test script to test the library, using yarn it would be `yarn test`.
