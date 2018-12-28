@@ -5,7 +5,7 @@ The queue can be initialized with an array and a call back that will execute whe
 
 The queue methods all return `false` if the queue is frozen, so handling of individual operations / retrying an operation should be done based on the response from the method not using the call back.
 
-The project is documented with jsdoc and all the documentation can be found on the github page here.
+The project is documented with jsdoc and all the documentation can be found on the github page: https://tastypackets.github.io/basic-queue/
 
 # Setup
 
@@ -18,6 +18,7 @@ const BasicQueue = require('basic-queue');
 ```
 
 ## Construction
+Basic operation examples, see the API documentation for full detials. https://tastypackets.github.io/basic-queue/
 ```javascript
 // A new empty queue
 const myQueue = new BasicQueue();
@@ -30,6 +31,12 @@ const myQueue3 = new BasicQueue([1,2,3], (q) => {
   console.log('Queue is frozen')
   console.log(`The queue size is ${q.queue.length}`)
 });
+
+// Add an item
+myQueue.add({text: 'Hello World'})
+
+// Get an item
+const nextItem = myQueue.getNext() // This will be {text: 'Hello World'}
 ```
 
 # Testing

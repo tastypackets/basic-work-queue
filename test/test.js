@@ -76,6 +76,19 @@ describe('Basic Operations', function() {
             q.frozenCB = 'another string'
             assert.strictEqual(q.frozenCB, testFn1);
         });
+        it('Should be able to set frozen to true / false', function() {
+            const q = new BasicQueue([], 'random string');
+            q.frozen = true;
+            assert.strictEqual(q.frozen, true);
+            q.frozen = false;
+            assert.strictEqual(q.frozen, false);
+        });
+        it('Should not be able to set frozen to anything except boolean', function() {
+            const q = new BasicQueue([], 'random string');
+            // This should not alter frozen
+            q.frozen = 'test';
+            assert.strictEqual(q.frozen, false);
+        });
     });
 
     describe('#freezeCheck()', function() {

@@ -1,4 +1,4 @@
-/** This is a basic queue for processing async requests */
+/** This is a basic queue for managing work flows */
 class BasicQueue {
     /**
      * Create a basic queue
@@ -16,10 +16,17 @@ class BasicQueue {
             this._queue = newQueue;
     };
 
+    /** @type {Array} */
     get queue() {
         return this._queue;
     };
 
+    set frozen(boolean) {
+        if(typeof boolean === 'boolean')
+            this._frozen = boolean;
+    };
+
+    /** @type {Boolean} */
     get frozen() {
         return this._frozen;
     };
@@ -29,6 +36,7 @@ class BasicQueue {
             this._frozenCB = cb;
     };
 
+    /** @type {Function} */
     get frozenCB() {
         return this._frozenCB;
     };

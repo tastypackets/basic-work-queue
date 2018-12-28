@@ -36,7 +36,7 @@
         <ul></ul>
     </div>
     
-    <div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="BasicQueue.html">BasicQueue</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="BasicQueue_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="BasicQueue.html#add">add</a></li><li><a href="BasicQueue.html#addToBeginning">addToBeginning</a></li><li><a href="BasicQueue.html#freeze">freeze</a></li><li><a href="BasicQueue.html#freezeCheck">freezeCheck</a></li><li><a href="BasicQueue.html#getIndex">getIndex</a></li><li><a href="BasicQueue.html#getLast">getLast</a></li><li><a href="BasicQueue.html#getNext">getNext</a></li><li><a href="BasicQueue.html#remove">remove</a></li><li><a href="BasicQueue.html#removeIndex">removeIndex</a></li><li><a href="BasicQueue.html#unfreeze">unfreeze</a></li></ul></div></li></ul></div>
+    <div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="BasicQueue.html">BasicQueue</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="BasicQueue_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="BasicQueue.html#frozen">frozen</a></li><li><a href="BasicQueue.html#frozenCB">frozenCB</a></li><li><a href="BasicQueue.html#queue">queue</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="BasicQueue.html#add">add</a></li><li><a href="BasicQueue.html#addToBeginning">addToBeginning</a></li><li><a href="BasicQueue.html#freeze">freeze</a></li><li><a href="BasicQueue.html#freezeCheck">freezeCheck</a></li><li><a href="BasicQueue.html#getIndex">getIndex</a></li><li><a href="BasicQueue.html#getLast">getLast</a></li><li><a href="BasicQueue.html#getNext">getNext</a></li><li><a href="BasicQueue.html#remove">remove</a></li><li><a href="BasicQueue.html#removeIndex">removeIndex</a></li><li><a href="BasicQueue.html#unfreeze">unfreeze</a></li></ul></div></li></ul></div>
 </nav>
 <div id="resizer"></div>
 
@@ -48,7 +48,7 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/** This is a basic queue for processing async requests */
+            <pre class="prettyprint source linenums"><code>/** This is a basic queue for managing work flows */
 class BasicQueue {
     /**
      * Create a basic queue
@@ -66,10 +66,12 @@ class BasicQueue {
             this._queue = newQueue;
     };
 
+    /** @type {Array} */
     get queue() {
         return this._queue;
     };
 
+    /** @type {Boolean} */
     get frozen() {
         return this._frozen;
     };
@@ -79,6 +81,7 @@ class BasicQueue {
             this._frozenCB = cb;
     };
 
+    /** @type {Function} */
     get frozenCB() {
         return this._frozenCB;
     };
