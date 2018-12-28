@@ -5,20 +5,20 @@ The queue can be initialized with an array and a call back that will execute whe
 
 The queue methods all return `false` if the queue is frozen, so handling of individual operations / retrying an operation should be done based on the response from the method not using the call back.
 
-The project is documented with jsdoc and all the documentation can be found on the github page: https://tastypackets.github.io/basic-queue/
+The project is documented with jsdoc and all the documentation can be found on the github page: https://tastypackets.github.io/basic-work-queue/
 
 # Setup
 
 ## Install
-`yarn add basic-queue` or `npm install --save basic-queue`
+`yarn add basic-work-queue` or `npm install --save basic-work-queue`
 
 ## Import
 ```javascript
-const BasicQueue = require('basic-queue');
+const BasicQueue = require('basic-work-queue');
 ```
 
 ## Construction
-Basic operation examples, see the API documentation for full detials. https://tastypackets.github.io/basic-queue/
+Basic operation examples, see the API documentation for full detials. https://tastypackets.github.io/basic-work-queue/
 ```javascript
 // A new empty queue
 const myQueue = new BasicQueue();

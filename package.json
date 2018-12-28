@@ -1,18 +1,19 @@
 {
-  "name": "basic-queue",
+  "name": "basic-work-queue",
   "version": "1.0.0",
   "description": "A basic queue for managing workflows",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "doc": "jsdoc index.js -c jsdoc.json"
+    "docs": "jsdoc index.js -c jsdoc.json -R ./README.md"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tastypackets/basic-queue.git"
+    "url": "git+https://github.com/tastypackets/basic-work-queue.git"
   },
   "keywords": [
     "queue",
+    "basicqueue",
     "work queue",
     "work flow",
     "basic queue"
@@ -20,9 +21,9 @@
   "author": "Ezekiel Keator",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tastypackets/basic-queue/issues"
+    "url": "https://github.com/tastypackets/basic-work-queue/issues"
   },
-  "homepage": "https://github.com/tastypackets/basic-queue#readme",
+  "homepage": "https://tastypackets.github.io/basic-work-queue/",
   "devDependencies": {
     "jsdoc": "^3.5.5",
     "mocha": "^5.2.0",

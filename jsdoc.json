@@ -6,12 +6,12 @@
         "recurse": true
     },
     "templates": {
-        "name": "basic-queue",
+        "name": "basic-work-queue",
         "footerText": "A basic JavaScript Queue",
         "logo": {
             "width": "0px",
             "height": "0px",
-            "link": "https://github.com/tastypackets/basic-queue"
+            "link": "https://github.com/tastypackets/basic-work-queue"
         }
     }
 }

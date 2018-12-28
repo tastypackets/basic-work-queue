@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Home | basic-queue</title>
+    <title>Home | basic-work-queue</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -20,13 +20,13 @@
 <nav class="lnb" id="lnb">
     <div class="logo" style="width: 0px; height: 0px">
         
-            <a href="https://github.com/tastypackets/basic-queue" rel="noopener noreferrer" target="_blank">
+            <a href="https://github.com/tastypackets/basic-work-queue" rel="noopener noreferrer" target="_blank">
                 <img src="img/toast-ui.png" width="100%" height="100%">
             </a>
         
     </div>
     <div class="title">
-        <h1><a href="index.html" class="link">basic-queue</a></h1>
+        <h1><a href="index.html" class="link">basic-work-queue</a></h1>
         
     </div>
     <div class="search-container" id="search-container">
@@ -55,6 +55,32 @@
 
     
 
+
+    <section>
+        <article class="readme"><h1>Description</h1><p>This is a basic queue, it is essentially an array with some additional methods to make it easier to control work flow. Since it is an array with no validation it allows the developer to put whatever they want in it, from strings to nested arrays.</p>
+<p>The queue can be initialized with an array and a call back that will execute whenever an op is attempted while the queue is frozen. The call back will receive the queue as the first and only variable its passed, this was done as convenience in case any form of logging was needed or perhaps a simple way of pausing data streams. This call back is set at the class level and is not intended to be set separately by every queue op. </p>
+<p>The queue methods all return <code>false</code> if the queue is frozen, so handling of individual operations / retrying an operation should be done based on the response from the method not using the call back.</p>
+<p>The project is documented with jsdoc and all the documentation can be found on the github page: https://tastypackets.github.io/basic-work-queue/</p>
+<h1>Setup</h1><h2>Install</h2><p><code>yarn add basic-queue</code> or <code>npm install --save basic-queue</code></p>
+<h2>Import</h2><pre class="prettyprint source lang-javascript"><code>const BasicQueue = require('basic-queue');</code></pre><h2>Construction</h2><p>Basic operation examples, see the API documentation for full detials. https://tastypackets.github.io/basic-work-queue/</p>
+<pre class="prettyprint source lang-javascript"><code>// A new empty queue
+const myQueue = new BasicQueue();
+
+// A new queue with a default array of values
+const myQueue2 = new BasicQueue([1,2,3]);
+
+// A new queue with a default array and a call back to execute when an op is attempted while frozen
+const myQueue3 = new BasicQueue([1,2,3], (q) => {
+  console.log('Queue is frozen')
+  console.log(`The queue size is ${q.queue.length}`)
+});
+
+// Add an item
+myQueue.add({text: 'Hello World'})
+
+// Get an item
+const nextItem = myQueue.getNext() // This will be {text: 'Hello World'}</code></pre><h1>Testing</h1><p>Run the mocha test script to test the library, using yarn it would be <code>yarn test</code>.</p></article>
+    </section>
 
 
 
