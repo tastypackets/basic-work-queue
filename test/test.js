@@ -1,5 +1,5 @@
 const assert = require('assert');
-const BasicQueue = require('../index').BasicQueue;
+const BasicQueue = require('../index');
 
 describe('Basic Operations', function() {
     describe('#constructor()', function() {
@@ -134,6 +134,27 @@ describe('Basic Operations', function() {
         });
     });
 
+    describe('#getIndex()', function() {
+        it('Should default to index 0', function() {
+            const q = new BasicQueue([1 , 2, 3, 4, 5, 6, 7, 8]);
+            assert.strictEqual(q.getIndex()[0], 1); // Defaults to 0
+            assert.strictEqual(q.queue.length, 7); // Should have gone down by 1
+        });
+        it('Should be able to get an item at a specific index', function() {
+            const q = new BasicQueue([1 , 2, 3, 4, 5, 6, 7, 8]);
+            assert.strictEqual(q.getIndex(3)[0], 4); // Get index 3
+            assert.strictEqual(q.queue.length, 7); // Should have gone down by 1
+        });
+        it('Should be able to get multiple items starting at specific index', function() {
+            const q = new BasicQueue([1 , 2, 3, 4, 5, 6, 7, 8]);
+            const items = q.getIndex(2, 3);
+            assert.strictEqual(items[0], 3);
+            assert.strictEqual(items[2], 5);
+            assert.strictEqual(items.length, 3);
+            assert.strictEqual(q.queue.length, 5);
+        });
+    });
+
     describe('#remove()', function() {
         it('Should be able to remove items', function() {
             const q = new BasicQueue([1 , 2, 3]);
@@ -151,6 +172,28 @@ describe('Basic Operations', function() {
             // Try to remove exact obj
             assert.strictEqual(q.remove(exactObj).success, true)
             assert.strictEqual(q.queue[0], 2)
+        });
+    });
+
+    describe('#removeIndex()', function() {
+        it('Should default to index 0', function() {
+            const q = new BasicQueue([1 , 2, 3]);
+            assert.strictEqual(q.removeIndex().success, true);
+            assert.strictEqual(q.queue[1], 3);
+            assert.strictEqual(q.queue.length, 2);
+        });
+        it('Should be able to delete specific index', function() {
+            const q = new BasicQueue([1 , 2, 3]);
+            assert.strictEqual(q.removeIndex(2).success, true);
+            assert.strictEqual(q.queue[1], 2);
+            assert.strictEqual(q.queue.length, 2);
+        });
+        it('Should be able to delete multiple items starting at a specific index', function() {
+            const q = new BasicQueue([1 , 2, 3, 4, 5]);
+            assert.strictEqual(q.removeIndex(2, 2).success, true);
+            assert.strictEqual(q.queue[1], 2);
+            assert.strictEqual(q.queue[2], 5);
+            assert.strictEqual(q.queue.length, 3);
         });
     });
   });

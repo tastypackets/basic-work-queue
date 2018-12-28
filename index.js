@@ -21,54 +21,13 @@ class BasicQueue {
 
     get frozen() {
         return this._frozen;
-    }
-
-    /**
-     * Gets the next items in queue
-     * @param {Number} qty The quantity to be retruend starting from index 0
-     */
-    getNext(qty = 1) {
-        if(this._frozen)
-            return this._frozenErrorMsg;
-
-        return this.getIndex(0, qty);
-    }
-
-    /**
-     * Gets the last item from the queue
-     * @param {Number} qty The quantity to be retruend
-     */
-    getLast(qty = 1) {
-        if(this._frozen)
-            return this._frozenErrorMsg;
-
-        return this.getIndex(qty * -1, qty).reverse();
-    }
-
-    /**
-     * Take an item out of the queue at a specific index
-     * @param {Number} index The index to start at
-     * @param {Number} qty The number of records to retrieve
-     */
-    getIndex(index, qty = 1) {
-        if(this._frozen)
-            return this._frozenErrorMsg;
-
-        // If the index is the start or end no need to freeze queue
-        if(index === 0 || index === -1)
-            return this._queue.splice(index,qty);
-
-        this.freeze();
-        const items = this._queue.splice(index,qty);
-        this.unfreeze();
-        return items;
-    }
+    };
 
     /** Freezes the queue */
     freeze() {
         this._frozen = true;
     };
-
+    
     /** Unfreeze the queue */
     unfreeze() {
         this._frozen = false;
@@ -99,6 +58,47 @@ class BasicQueue {
     };
 
     /**
+     * Gets the next items in queue
+     * @param {Number} qty The quantity to be retruend starting from index 0
+     */
+    getNext(qty = 1) {
+        if(this._frozen)
+            return this._frozenErrorMsg;
+
+        return this.getIndex(0, qty);
+    }
+
+    /**
+     * Gets the last item from the queue
+     * @param {Number} qty The quantity to be retruend
+     */
+    getLast(qty = 1) {
+        if(this._frozen)
+            return this._frozenErrorMsg;
+
+        return this.getIndex(qty * -1, qty).reverse();
+    }
+
+    /**
+     * Take an item out of the queue at a specific index
+     * @param {Number} index The index to start at
+     * @param {Number} qty The number of records to retrieve
+     */
+    getIndex(index = 0, qty = 1) {
+        if(this._frozen)
+            return this._frozenErrorMsg;
+
+        // If the index is the start or end no need to freeze queue
+        if(index === 0 || index === -1)
+            return this._queue.splice(index,qty);
+
+        this.freeze();
+        const items = this._queue.splice(index,qty);
+        this.unfreeze();
+        return items;
+    }
+
+    /**
      * Locates the item and removes it from the queue
      * @param {*} item Must be the EXACT item (===) comparison done
      */
@@ -117,15 +117,13 @@ class BasicQueue {
      * Remove one item based on the array index
      * @param {Number} index Index of the item to be removed
      */
-    removeIndex(index) {
-        if(this._frozen)
-            return this._frozenErrorMsg;
+    removeIndex(index = 0, qty = 1) {
+        // Use get index, but ignore it's returned value
+        this.getIndex(index, qty);
 
-        this.freeze();
-        this._queue.splice(index, 1);
-        this.unfreeze();
+        // Return success msg
         return {success: true, message: `Item removed from array at position ${index}.`};
     };
 }
 
-module.exports.BasicQueue = BasicQueue;
+module.exports = BasicQueue;
