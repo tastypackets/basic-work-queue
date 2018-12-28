@@ -71,6 +71,11 @@ class BasicQueue {
         return this._queue;
     };
 
+    set frozen(boolean) {
+        if(typeof boolean === 'boolean')
+            this._frozen = boolean;
+    };
+
     /** @type {Boolean} */
     get frozen() {
         return this._frozen;
