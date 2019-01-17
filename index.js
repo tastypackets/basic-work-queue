@@ -94,7 +94,7 @@ class BasicQueue {
     /**
      * Gets the next items in queue
      * @param {Number} qty The quantity to be returned starting from index 0
-     * @returns {*} Returns an array of values or false if frozen
+     * @returns {(Array|Boolean)} Returns an array of values or false if frozen
      */
     getNext(qty = 1) {
         if(this.freezeCheck())
@@ -106,7 +106,7 @@ class BasicQueue {
     /**
      * Gets the last item from the queue
      * @param {Number} qty The quantity to be returned
-     * @returns {*} Returns an array of values or false if frozen
+     * @returns {(Array|Boolean)} Returns an array of values or false if frozen
      */
     getLast(qty = 1) {
         if(this.freezeCheck())
@@ -119,7 +119,7 @@ class BasicQueue {
      * Take an item out of the queue at a specific index
      * @param {Number} index The index to start at
      * @param {Number} qty The number of records to retrieve
-     * @returns {*} Returns an array of values or false if frozen
+     * @returns {(Array|Boolean)} Returns an array of values or false if frozen
      */
     getIndex(index = 0, qty = 1) {
         if(this.freezeCheck())

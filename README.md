@@ -24,22 +24,32 @@ const BasicQueue = require('basic-work-queue');
 Basic operation examples, see the API documentation for full detials. https://tastypackets.github.io/basic-work-queue/
 ```javascript
 // A new empty queue
-const myQueue = new BasicQueue();
+let myQueue = new BasicQueue();
 
 // A new queue with a default array of values
-const myQueue2 = new BasicQueue([1,2,3]);
+myQueue = new BasicQueue([1,2,3]);
 
 // A new queue with a default array and a call back to execute when an op is attempted while frozen
-const myQueue3 = new BasicQueue([1,2,3], (q) => {
+myQueue = new BasicQueue([1,2,3], (q) => {
   console.log('Queue is frozen')
   console.log(`The queue size is ${q.queue.length}`)
 });
 
 // Add an item
-myQueue.add({text: 'Hello World'})
+myQueue.add(5); // Queue is now [1,2,3,4,5] - returns true
 
-// Get an item
-const nextItem = myQueue.getNext() // This will be {text: 'Hello World'}
+// Add an item to the beginning of the queue - queue is now [1,2,3,4,5, {text: 'Hello World'}] - returns true
+myQueue.addToBeginning({text: 'Hello World'});
+
+// Get next item
+const nextItem = myQueue.getNext() // This will return [{text: 'Hello World'}]
+const lastItem = myQueue.getLast() // This will return [5]
+
+// Get multiple at once
+const next2 = myQueue.getNext(2) // This will return [1,2]
+
+// Remove an item
+myQueue.remove(3) // Returns true
 ```
 
 # Testing
