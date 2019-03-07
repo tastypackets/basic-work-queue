@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/tastypackets/basic-work-queue.svg?branch=master)](https://travis-ci.org/tastypackets/basic-work-queue)
-![npm](https://img.shields.io/npm/v/basic-work-queue.svg) <br/>
+![npm](https://img.shields.io/npm/v/basic-work-queue.svg) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftastypackets%2Fbasic-work-queue.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftastypackets%2Fbasic-work-queue?ref=badge_shield)
+<br/>
 
 # Description
 This is a basic queue, it is essentially an array with some additional methods to make it easier to control work flow. Since it is an array with no validation it allows the developer to put whatever they want in it, from strings to nested arrays.
@@ -54,3 +55,7 @@ myQueue.remove(3) // Returns true
 
 # Testing
 Run the mocha test script to test the library, using yarn it would be `yarn test`.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftastypackets%2Fbasic-work-queue.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftastypackets%2Fbasic-work-queue?ref=badge_large)
