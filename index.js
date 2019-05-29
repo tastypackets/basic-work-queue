@@ -14,42 +14,47 @@ class BasicQueue {
     set queue(newQueue) {
         if(Array.isArray(newQueue))
             this._queue = newQueue;
-    };
+    }
 
     /** @type {Array} */
     get queue() {
         return this._queue;
-    };
+    }
+
+    /** @type {string} */
+    get length() {
+        return this._queue.length;
+    }
 
     set frozen(boolean) {
         if(typeof boolean === 'boolean')
             this._frozen = boolean;
-    };
+    }
 
     /** @type {Boolean} */
     get frozen() {
         return this._frozen;
-    };
+    }
 
     set frozenCB(cb) {
         if(typeof cb === 'function')
             this._frozenCB = cb;
-    };
+    }
 
     /** @type {Function} */
     get frozenCB() {
         return this._frozenCB;
-    };
+    }
 
     /** Freezes the queue */
     freeze() {
         this._frozen = true;
-    };
+    }
     
     /** Unfreeze the queue */
     unfreeze() {
         this._frozen = false;
-    };
+    }
 
     /** Checks if frozen and executes CB if one is provided 
      *  Internal FN designed for lib use
@@ -63,7 +68,7 @@ class BasicQueue {
             this.frozenCB(this);
         
         return true;
-    };
+    }
 
     /**
      * Adds one item to the end of the queue
@@ -76,7 +81,7 @@ class BasicQueue {
 
         this._queue.push(item);
         return true;
-    };
+    }
 
     /**
      * Add one item to the beginning of the queue
@@ -89,7 +94,7 @@ class BasicQueue {
 
         this._queue.splice(0, 0, item);
         return true;
-    };
+    }
 
     /**
      * Gets the next items in queue
@@ -101,7 +106,7 @@ class BasicQueue {
             return false;
 
         return this.getIndex(0, qty);
-    };
+    }
 
     /**
      * Gets the last item from the queue
@@ -113,7 +118,15 @@ class BasicQueue {
             return false;
 
         return this.getIndex(qty * -1, qty).reverse();
-    };
+    }
+
+    /** Gets all items currently in the queue */
+    getAll() {
+        if(this.freezeCheck())
+            return false;
+
+        return this.getIndex(0, this.length);
+    }
 
     /**
      * Take an item out of the queue at a specific index
@@ -126,7 +139,7 @@ class BasicQueue {
             return false;
 
         return this._queue.splice(index,qty);
-    };
+    }
 
     /**
      * Locates the item and removes it from the queue
@@ -142,7 +155,7 @@ class BasicQueue {
             return false;
 
         return this.removeIndex(index);
-    };
+    }
 
     /**
      * Remove one item based on the array index
@@ -156,7 +169,7 @@ class BasicQueue {
 
         // Return success
         return true;
-    };
-};
+    }
+}
 
 module.exports = BasicQueue;
