@@ -120,7 +120,10 @@ class BasicQueue {
         return this.getIndex(qty * -1, qty).reverse();
     }
 
-    /** Gets all items currently in the queue */
+    /** 
+     * Gets all items currently in the queue 
+     * @returns {Array|Boolean} All items in queue or false if frozen
+     */
     getAll() {
         if(this.freezeCheck())
             return false;
