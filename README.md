@@ -3,7 +3,8 @@
 <br/>
 
 # Description
-:tada: :tada: Check out what's new in 1.0.2: https://github.com/tastypackets/basic-work-queue/releases/tag/1.0.2
+:tada::tada: Check out what's new in 1.1.0 https://github.com/tastypackets/basic-work-queue/releases/latest
+
 This is a basic queue, it is essentially an array with some additional methods to make it easier to control work flow. Since it is an array with no validation it allows the developer to put whatever they want in it, from strings to nested arrays.
 
 The queue can be initialized with an array and a call back that will execute whenever an op is attempted while the queue is frozen. The call back will receive the queue as the first and only variable its passed, this was done as convenience in case any form of logging was needed or perhaps a simple way of pausing data streams. This call back is set at the class level and is not intended to be set separately by every queue op. 
