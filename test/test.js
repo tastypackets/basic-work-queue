@@ -16,6 +16,10 @@ describe('Basic Operations', function() {
         it('Should be able to get queue', function() {
             assert.strictEqual(Array.isArray(new BasicQueue().queue), true);
         });
+        it('Should be able to get queue length', function() {
+            assert.strictEqual(new BasicQueue().length, 0);
+            assert.strictEqual(new BasicQueue([1, 2]).length, 2);
+        });
         it('Should be able to set the queue', function() {
             const q = new BasicQueue();
 
@@ -179,6 +183,19 @@ describe('Basic Operations', function() {
             const q = new BasicQueue([1 , 2, 3]);
             q.freeze();
             assert.strictEqual(q.getNext(1), false);
+        });
+    });
+
+    describe('#getAll()', function() {
+        it('Should be able to get all items in queue', function() {
+            const q = new BasicQueue([1 , 2, 3]);
+            assert.deepStrictEqual(q.getAll(), [1, 2, 3]);
+            assert.strictEqual(q.length, 0);
+        });
+        it('Should return false if frozen', function() {
+            const q = new BasicQueue([1 , 2, 3]);
+            q.freeze();
+            assert.strictEqual(q.getAll(), false);
         });
     });
 

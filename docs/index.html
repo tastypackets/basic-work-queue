@@ -34,7 +34,7 @@
         <ul></ul>
     </div>
     
-    <div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="BasicQueue.html">BasicQueue</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="BasicQueue_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="BasicQueue.html#frozen">frozen</a></li><li><a href="BasicQueue.html#frozenCB">frozenCB</a></li><li><a href="BasicQueue.html#queue">queue</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="BasicQueue.html#add">add</a></li><li><a href="BasicQueue.html#addToBeginning">addToBeginning</a></li><li><a href="BasicQueue.html#freeze">freeze</a></li><li><a href="BasicQueue.html#freezeCheck">freezeCheck</a></li><li><a href="BasicQueue.html#getIndex">getIndex</a></li><li><a href="BasicQueue.html#getLast">getLast</a></li><li><a href="BasicQueue.html#getNext">getNext</a></li><li><a href="BasicQueue.html#remove">remove</a></li><li><a href="BasicQueue.html#removeIndex">removeIndex</a></li><li><a href="BasicQueue.html#unfreeze">unfreeze</a></li></ul></div></li></ul></div>
+    <div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="BasicQueue.html">BasicQueue</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="BasicQueue_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="BasicQueue.html#frozen">frozen</a></li><li><a href="BasicQueue.html#frozenCB">frozenCB</a></li><li><a href="BasicQueue.html#length">length</a></li><li><a href="BasicQueue.html#queue">queue</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="BasicQueue.html#add">add</a></li><li><a href="BasicQueue.html#addToBeginning">addToBeginning</a></li><li><a href="BasicQueue.html#freeze">freeze</a></li><li><a href="BasicQueue.html#freezeCheck">freezeCheck</a></li><li><a href="BasicQueue.html#getAll">getAll</a></li><li><a href="BasicQueue.html#getIndex">getIndex</a></li><li><a href="BasicQueue.html#getLast">getLast</a></li><li><a href="BasicQueue.html#getNext">getNext</a></li><li><a href="BasicQueue.html#remove">remove</a></li><li><a href="BasicQueue.html#removeIndex">removeIndex</a></li><li><a href="BasicQueue.html#unfreeze">unfreeze</a></li></ul></div></li></ul></div>
 </nav>
 <div id="resizer"></div>
 
@@ -58,8 +58,10 @@
 
     <section>
         <article class="readme"><p><a href="https://travis-ci.org/tastypackets/basic-work-queue"><img src="https://travis-ci.org/tastypackets/basic-work-queue.svg?branch=master" alt="Build Status"></a>
-<img src="https://img.shields.io/npm/v/basic-work-queue.svg" alt="npm"> <br/></p>
-<h1>Description</h1><p>This is a basic queue, it is essentially an array with some additional methods to make it easier to control work flow. Since it is an array with no validation it allows the developer to put whatever they want in it, from strings to nested arrays.</p>
+<img src="https://img.shields.io/npm/v/basic-work-queue.svg" alt="npm"> <a href="https://app.fossa.io/projects/git%2Bgithub.com%2Ftastypackets%2Fbasic-work-queue?ref=badge_shield"><img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftastypackets%2Fbasic-work-queue.svg?type=shield" alt="FOSSA Status"></a>
+<br/></p>
+<h1>Description</h1><p>:tada::tada: Check out what's new in 1.1.0 https://github.com/tastypackets/basic-work-queue/releases/latest</p>
+<p>This is a basic queue, it is essentially an array with some additional methods to make it easier to control work flow. Since it is an array with no validation it allows the developer to put whatever they want in it, from strings to nested arrays.</p>
 <p>The queue can be initialized with an array and a call back that will execute whenever an op is attempted while the queue is frozen. The call back will receive the queue as the first and only variable its passed, this was done as convenience in case any form of logging was needed or perhaps a simple way of pausing data streams. This call back is set at the class level and is not intended to be set separately by every queue op. </p>
 <p>The queue methods all return <code>false</code> if the queue is frozen, so handling of individual operations / retrying an operation should be done based on the response from the method not using the call back.</p>
 <p>The project is documented with jsdoc and all the documentation can be found on the github page: https://tastypackets.github.io/basic-work-queue/</p>
@@ -91,7 +93,8 @@ const lastItem = myQueue.getLast() // This will return [5]
 const next2 = myQueue.getNext(2) // This will return [1,2]
 
 // Remove an item
-myQueue.remove(3) // Returns true</code></pre><h1>Testing</h1><p>Run the mocha test script to test the library, using yarn it would be <code>yarn test</code>.</p></article>
+myQueue.remove(3) // Returns true</code></pre><h1>Testing</h1><p>Run the mocha test script to test the library, using yarn it would be <code>yarn test</code>.</p>
+<h2>License</h2><p><a href="https://app.fossa.io/projects/git%2Bgithub.com%2Ftastypackets%2Fbasic-work-queue?ref=badge_large"><img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftastypackets%2Fbasic-work-queue.svg?type=large" alt="FOSSA Status"></a></p></article>
     </section>
 
 
