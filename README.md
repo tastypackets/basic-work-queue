@@ -35,7 +35,7 @@ myQueue = new BasicQueue([1,2,3]);
 // A new queue with a default array and a call back to execute when an op is attempted while frozen
 myQueue = new BasicQueue([1,2,3], (q) => {
   console.log('Queue is frozen')
-  console.log(`The queue size is ${q.queue.length}`)
+  console.log(`The queue size is ${q.length}`)
 });
 
 // Add an item
