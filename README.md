@@ -1,3 +1,8 @@
+# Deprecated
+
+This was an old JS module I made when first learning JS to learn the basics of publishing a module. It doesn't have a lot of real value, so I'm archving the repo.
+
+
 [![Build Status](https://travis-ci.org/tastypackets/basic-work-queue.svg?branch=master)](https://travis-ci.org/tastypackets/basic-work-queue)
 ![npm](https://img.shields.io/npm/v/basic-work-queue.svg) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftastypackets%2Fbasic-work-queue.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftastypackets%2Fbasic-work-queue?ref=badge_shield)
 <br/>
